@@ -23,24 +23,17 @@ type Userdata struct {
 
 // main function
 func main() {
-
 	for remainingTickets > 0 {
-
 		greetUsers() // greeting function
 		// get user input functions
 		firstname, Lastname, userTickets, useremail := getUserinput()
 		//validate user inputs
 		isValidName, isValidEmail, isvalidticketNo := common.ValidateInputParameters(firstname, Lastname, useremail, userTickets, remainingTickets)
-
 		if isValidName && isValidEmail && isvalidticketNo {
-
 			bookingTickets(firstname, Lastname, userTickets, useremail)
-
 			go sendTicket(firstname, Lastname, userTickets, useremail)
 			firstNames := getFirstnames()
-
 			fmt.Printf("The first names of bookings are %v\n", firstNames)
-
 			if remainingTickets == 0 {
 				//end the loop
 				fmt.Println("All tickets are booked, Come next day...😊👍⏭️")
@@ -50,15 +43,12 @@ func main() {
 			if !isValidName {
 				fmt.Println("First or last name you enter is too short")
 			}
-
 			if !isValidEmail {
 				fmt.Println("Email address you enter doesn't contain @ sign")
 			}
-
 			if !isvalidticketNo {
 				fmt.Println("Number of tickets you enter is invalid")
 			}
-
 			fmt.Println("Try again....!")
 		}
 	}
@@ -84,31 +74,24 @@ func getFirstnames() []string {
 
 // get User input
 func getUserinput() (string, string, uint, string) {
-
 	var firstname string
 	var Lastname string
 	var userTickets uint
 	var useremail string
-
 	fmt.Println("Enter the first name ")
 	fmt.Scan(&firstname)
-
 	fmt.Println("Enter the last name ")
 	fmt.Scan(&Lastname)
-
 	fmt.Println("Enter the number of tickets want to book")
 	fmt.Scan(&userTickets)
-
 	fmt.Println("Enter your email")
 	fmt.Scan(&useremail)
-
 	return firstname, Lastname, userTickets, useremail
 }
 
 // booking tickets
 func bookingTickets(firstname string, Lastname string, userTickets uint, useremail string) {
 	remainingTickets = remainingTickets - userTickets
-
 	var userData = Userdata{
 		firstName:       firstname,
 		Lastname:        Lastname,
@@ -116,12 +99,10 @@ func bookingTickets(firstname string, Lastname string, userTickets uint, userema
 		numberOfTickets: userTickets,
 	}
 	booking = append(booking, userData)
-
 	fmt.Printf("List of bookings is %v\n", booking)
 	fmt.Printf("%v buy %v tickets\n", firstname, userTickets)
 	fmt.Printf("Thankyou %v %v for booking %v tickets....😊😊😊\n", firstname, Lastname, userTickets)
 	fmt.Printf("Remaining tickets are %v\n", remainingTickets)
-
 }
 
 // sending tickets function
@@ -131,5 +112,4 @@ func sendTicket(firstName string, lastname string, userTickets uint, email strin
 	fmt.Println("😊😊😊😊TICKET BOOKED😊😊😊😊😊😊😊😊😊")
 	fmt.Printf("Sending %v to email address %v\n", tickets, email)
 	fmt.Println("📩📩📩📩📩 SENT SENT SENT ...📩📩📩📩📩📩")
-
 }
